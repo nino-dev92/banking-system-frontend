@@ -1,0 +1,17 @@
+.round {
+  border: 5px solid black;
+  border-top: 5px solid #11111180;
+  max-width: 30px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  animation: rotate 1s ease infinite forwards;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

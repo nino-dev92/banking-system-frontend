@@ -1,0 +1,35 @@
+.navbar {
+  background: linear-gradient(135deg, #00296f, #001644);
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  margin-right: 40px;
+}
+.nav-links a.active {
+  color: red;
+}
+
+.nav-icons span {
+  cursor: pointer;
+  margin-left: 10px;
+}
