@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Deposit from "./pages/actions/Deposit";
 import Withdraw from "./pages/actions/Withdraw";
 import Transfer from "./pages/actions/Transfer";
+import Mode from "./components/Mode";
 
 function App() {
   return (
@@ -16,10 +17,11 @@ function App() {
           <Route path="signup" element={<Signup />} />
         </Route>
         <Route element={<RequireAuth />}>
-          <Route path="/dash" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/deposit" element={<Deposit />} />
           <Route path="/withdraw" element={<Withdraw />} />
           <Route path="/transfer" element={<Transfer />} />
+          <Route path="/create-account" element={<Mode />} />
         </Route>
       </Routes>
     </>

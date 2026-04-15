@@ -36,8 +36,8 @@ const Login: React.FC = () => {
         username: response?.data?.username,
         islogged: true,
       });
-
-      if (response.status == 200) navigate("/dash");
+      if (!response?.data?.accNumber) navigate("/create-account");
+      if (response.status == 200) navigate("/dashboard");
     } catch (error: any) {
       setMessage(error.response.data?.error);
     }
