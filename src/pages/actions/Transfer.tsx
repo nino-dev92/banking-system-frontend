@@ -5,6 +5,7 @@ import { useAuth } from "../../context/AuthProvider";
 import useAxios from "../../hooks/useAxios";
 import type { AxiosResponse } from "axios";
 import Spinner from "../../components/Spinner";
+import TopBar from "../../components/TopBar";
 
 const Transfer = () => {
   const [name, setName] = useState<string | null>("");
@@ -109,17 +110,10 @@ const Transfer = () => {
           <SideNav />
 
           {/* Topbar */}
-          <header className="fixed top-0 left-64 right-0 h-16 bg-white/80 backdrop-blur border-b flex items-center justify-between px-8 z-40">
-            <div className="flex items-center gap-4">
-              <span className="text-xl font-bold text-blue-950">CPR Bank</span>
-            </div>
-            <h2 className="text-2xl font-bold">
-              Welcome {name?.toUpperCase()}
-            </h2>
-          </header>
+          <TopBar name={name as string} />
 
           {/* Main */}
-          <main className="pt-24 pl-70 pr-8 pb-12 min-h-screen">
+          <main className="pl-0 pt-24 sm:pl-70 pr-8 pb-12 min-h-screen">
             <div className="max-w-7xl mx-auto space-y-8 flex-col justify-center">
               {/* Balance Section */}
               <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">

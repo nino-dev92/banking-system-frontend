@@ -145,8 +145,8 @@ const Signup: React.FC = () => {
             </div>
 
             <p>
-              By creating an account, you agree to the Sovereign Vault protocol
-              and privacy standards.
+              By creating an account, you agree to the CPR banking protocol and
+              privacy standards.
             </p>
           </footer>
         </section>

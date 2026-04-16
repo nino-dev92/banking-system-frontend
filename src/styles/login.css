@@ -40,6 +40,14 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+@media (max-width: 900px) {
+  .left-panel {
+    display: none;
+  }
+  .login-container {
+    display: flex;
+  }
+}
 
 .features {
   display: flex;

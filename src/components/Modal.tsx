@@ -20,10 +20,10 @@ const Modal = ({ createAccount, setName }: ModalProps) => {
   };
 
   return (
-    <>
+    <div className="place-items-center place-content-center">
       <SideNav />
 
-      <div className="m-20 border flex-col justify-center p-4 rounded min-w-100 ml-85">
+      <div className="ml-0 sm:m-20 sm:ml-85 border flex-col justify-center p-4 rounded max-w-90">
         <h1 className="text-center text-2xl">Create Account</h1>
         <p className="m-10 text-center text-2xl">
           You dont have an account with us
@@ -37,7 +37,7 @@ const Modal = ({ createAccount, setName }: ModalProps) => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
