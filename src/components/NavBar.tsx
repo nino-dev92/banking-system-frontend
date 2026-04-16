@@ -6,7 +6,7 @@ const Navbar = () => {
   const [active, setActive] = useState<string>("");
 
   return (
-    <nav className="navbar">
+    <nav className="navbar z-10">
       <div className="logo">CPR Bank</div>
 
       <div className="nav-links">

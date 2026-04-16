@@ -29,7 +29,7 @@ const SideNav: React.FC = () => {
 
       <nav className="flex-1 space-y-1 navlinks">
         <NavLink
-          to="/dash"
+          to="/dashboard"
           className={`flex items-center gap-3 rounded-xl px-4 py-3 cursor-pointer text-slate-500 hover:text-blue-900 hover:bg-blue-500`}
         >
           <span>

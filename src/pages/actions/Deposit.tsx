@@ -14,7 +14,7 @@ const Deposit = () => {
   const [message, setMessage] = useState<string>("");
   const [income, setIncome] = useState<number | null>(0);
   const [spent, setSpent] = useState<number | null>(0);
-  const { auth } = useAuth();
+  const { auth, hasAccount } = useAuth();
   const apiAxios = useAxios();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -89,13 +89,13 @@ const Deposit = () => {
     <>
       {loading && <Spinner />}
 
-      {!name && !loading && (
+      {!hasAccount && !loading && (
         <>
           <Modal createAccount={createAccount} setName={setName} />
         </>
       )}
 
-      {name && !loading && (
+      {hasAccount && !loading && (
         <div className="bg-background text-on-background min-h-screen">
           {/* Sidebar */}
           <SideNav />

@@ -6,13 +6,14 @@ import Dashboard from "./pages/Dashboard";
 import Deposit from "./pages/actions/Deposit";
 import Withdraw from "./pages/actions/Withdraw";
 import Transfer from "./pages/actions/Transfer";
-import Mode from "./components/Mode";
+import LandingPage from "./pages/landingpage/LandingPage";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/">
+          <Route path="/" element={<LandingPage />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
         </Route>
@@ -21,7 +22,6 @@ function App() {
           <Route path="/deposit" element={<Deposit />} />
           <Route path="/withdraw" element={<Withdraw />} />
           <Route path="/transfer" element={<Transfer />} />
-          <Route path="/create-account" element={<Mode />} />
         </Route>
       </Routes>
     </>

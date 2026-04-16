@@ -8,7 +8,7 @@ type ModalProps = {
 };
 
 const Modal = ({ createAccount, setName }: ModalProps) => {
-  const { auth } = useAuth();
+  const { auth, setHasAccount } = useAuth();
 
   const runAction = async (
     FN: Function,
@@ -16,6 +16,7 @@ const Modal = ({ createAccount, setName }: ModalProps) => {
   ) => {
     await FN();
     action(auth.username);
+    setHasAccount(true);
   };
 
   return (

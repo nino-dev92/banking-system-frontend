@@ -105,7 +105,7 @@ const Signup: React.FC = () => {
                     type="button"
                     onClick={() => setPasswordVisible(!passwordVisible)}
                   >
-                    <span className="material-symbols-outlined">
+                    <span className="text-sm">
                       {passwordVisible === true ? "hide" : "show"}
                     </span>
                   </button>
@@ -124,7 +124,7 @@ const Signup: React.FC = () => {
 
             <div className="login-link">
               <p>
-                Already have a vault?
+                Already have an account?
                 <Link to="/login"> Log in. </Link>
               </p>
             </div>

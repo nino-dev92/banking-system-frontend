@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
   const [income, setIncome] = useState<number | null>(0);
   const [spent, setSpent] = useState<number | null>(0);
   const [text, setText] = useState<string>("Show History");
-  const { auth } = useAuth();
+  const { auth, hasAccount, setHasAccount } = useAuth();
   const apiAxios = useAxios();
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -49,6 +49,7 @@ const Dashboard: React.FC = () => {
       setIncome(response?.data?.income);
       setSpent(response?.data?.spent);
     } catch (error: any) {
+      setHasAccount(false);
       console.log(error);
     } finally {
       setLoading(false);
@@ -67,13 +68,13 @@ const Dashboard: React.FC = () => {
     <>
       {loading && <Spinner />}
 
-      {!name && !loading && (
+      {!hasAccount && !loading && (
         <>
           <Modal createAccount={createAccount} setName={setName} />
         </>
       )}
 
-      {name && !loading && (
+      {hasAccount && !loading && (
         <div className="bg-background text-on-background min-h-screen">
           {/* Sidebar */}
           <SideNav />

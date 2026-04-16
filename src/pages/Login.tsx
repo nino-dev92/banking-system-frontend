@@ -76,7 +76,7 @@ const Login: React.FC = () => {
                 <label>Username</label>
                 <input
                   type="text"
-                  placeholder="Your Username"
+                  placeholder="Your username"
                   name="username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
