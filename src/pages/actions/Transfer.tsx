@@ -16,6 +16,7 @@ const Transfer = () => {
   const [message, setMessage] = useState<string>("");
   const [income, setIncome] = useState<number | null>(0);
   const [spent, setSpent] = useState<number | null>(0);
+  const [open, setOpen] = useState<boolean>(false);
   const { auth, hasAccount } = useAuth();
   const apiAxios = useAxios();
   const [loading, setLoading] = useState<boolean>(false);
@@ -107,10 +108,10 @@ const Transfer = () => {
       {hasAccount && !loading && (
         <div className="bg-background text-on-background min-h-screen">
           {/* Sidebar */}
-          <SideNav />
+          <SideNav open={open} setOpen={setOpen} />
 
           {/* Topbar */}
-          <TopBar name={name as string} />
+          <TopBar name={name as string} setOpen={setOpen} open={open} />
 
           {/* Main */}
           <main className="pl-0 pt-24 sm:pl-70 pr-8 pb-12 min-h-screen">
