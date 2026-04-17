@@ -7,6 +7,7 @@ import Deposit from "./pages/actions/Deposit";
 import Withdraw from "./pages/actions/Withdraw";
 import Transfer from "./pages/actions/Transfer";
 import LandingPage from "./pages/landingpage/LandingPage";
+import Spinner from "./components/Spinner";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/withdraw" element={<Withdraw />} />
           <Route path="/transfer" element={<Transfer />} />
         </Route>
+        <Route path="/spinner" element={<Spinner />} />
       </Routes>
     </>
   );

@@ -25,7 +25,10 @@ const Signup: React.FC = () => {
       setMessage("Password must be 6 digits");
       return;
     }
-    const body: Object = JSON.stringify({ username, password });
+    const body: Object = JSON.stringify({
+      username: username.toLowerCase(),
+      password,
+    });
     try {
       const response: AxiosResponse = await useAxios.post(
         "/auth/signup",

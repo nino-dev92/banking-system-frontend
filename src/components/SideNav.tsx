@@ -99,7 +99,7 @@ const SideNav = ({ open, setOpen }: NavProps) => {
         <div className="mb-10 px-2">
           <div className="">
             <IoArrowBackCircleOutline
-              size={30}
+              size={60}
               style={{ color: "white", marginBottom: "20px" }}
               className="cursor-pointer hover:text-red-500"
               onClick={() => setOpen(!open)}

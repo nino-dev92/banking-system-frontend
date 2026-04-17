@@ -85,8 +85,8 @@ const Dashboard: React.FC = () => {
           <TopBar name={name as string} setOpen={setOpen} open={open} />
 
           {/* Main */}
-          <main className="pl-0 pt-24 sm:pl-70 pr-8 pb-12 min-h-screen">
-            <div className="max-w-7xl mx-auto space-y-8">
+          <main className="pl-5 pr-5 pt-24 sm:pl-65 pb-12 min-h-screen">
+            <div className="max-w-7xl m-auto space-y-8">
               {/* Balance Section */}
               <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 bg-gradient-to-br from-[#00296f] to-[#001644] rounded-xl p-8 text-white flex flex-col justify-between min-h-[240px]">

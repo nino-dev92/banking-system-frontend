@@ -23,7 +23,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const body: Object = { username, password };
+    const body: Object = { username: username.toLowerCase(), password };
     try {
       const response: AxiosResponse = await apiAxios.post(
         "/auth/login",

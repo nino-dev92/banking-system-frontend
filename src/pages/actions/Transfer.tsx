@@ -114,7 +114,7 @@ const Transfer = () => {
           <TopBar name={name as string} setOpen={setOpen} open={open} />
 
           {/* Main */}
-          <main className="pl-0 pt-24 sm:pl-70 pr-8 pb-12 min-h-screen">
+          <main className="pl-5 pr-5 pt-24 sm:pl-65 pb-12 min-h-screen">
             <div className="max-w-7xl mx-auto space-y-8 flex-col justify-center">
               {/* Balance Section */}
               <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
