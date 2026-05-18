@@ -2,6 +2,7 @@ import type { SetStateAction } from "react";
 import { useState } from "react";
 import SideNav from "./SideNav";
 import { useAuth } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 type ModalProps = {
   createAccount: () => Promise<void>;
@@ -11,6 +12,7 @@ type ModalProps = {
 const Modal = ({ createAccount, setName }: ModalProps) => {
   const { auth, setHasAccount } = useAuth();
   const [open, setOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const runAction = async (
     FN: Function,
@@ -19,6 +21,8 @@ const Modal = ({ createAccount, setName }: ModalProps) => {
     await FN();
     action(auth.username);
     setHasAccount(true);
+    navigate("/dashboard");
+    window.location.reload();
   };
 
   return (
