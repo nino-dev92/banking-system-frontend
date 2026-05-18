@@ -89,7 +89,7 @@ const Dashboard: React.FC = () => {
             <div className="max-w-7xl m-auto space-y-8">
               {/* Balance Section */}
               <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 bg-gradient-to-br from-[#00296f] to-[#001644] rounded-xl p-8 text-white flex flex-col justify-between min-h-[240px]">
+                <div className="lg:col-span-2 bg-linear-to-br from-[#00296f] to-[#001644] rounded-xl p-8 text-white flex flex-col justify-between min-h-[240px]">
                   <div>
                     <p className="text-sm opacity-70 mb-1">
                       Total Available Balance

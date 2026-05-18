@@ -22,17 +22,17 @@ const Modal = ({ createAccount, setName }: ModalProps) => {
   };
 
   return (
-    <div className="place-items-center place-content-center">
+    <div className="flex items-center justify-center min-h-screen w-full">
       <SideNav open={open} setOpen={setOpen} />
 
-      <div className="ml-0 sm:m-20 sm:ml-85 border flex-col justify-center p-4 rounded max-w-90">
-        <h1 className="text-center text-2xl">Create Account</h1>
-        <p className="m-10 text-center text-2xl">
+      <div className="mx-4 sm:m-20 sm:ml-85 border flex flex-col justify-center items-center p-8 rounded max-w-md w-full bg-white text-black shadow-lg">
+        <h1 className="text-center text-2xl font-bold">Create Account</h1>
+        <p className="m-6 text-center text-xl">
           You dont have an account with us
         </p>
         <div className="flex justify-center">
           <button
-            className="border p-2 bg-green-500 rounded cursor-pointer hover:bg-green-400 hover:text-white"
+            className="border p-2 px-4 bg-green-500 rounded cursor-pointer hover:bg-green-400 hover:text-white transition"
             onClick={() => runAction(createAccount, setName)}
           >
             Create Account

@@ -21,11 +21,11 @@ const SideNav = ({ open, setOpen }: NavProps) => {
   return (
     <div>
       {/**Desktop nav */}
-      <aside className="hidden sm:flex bg-gradient-to-br from-[#00296f] to-[#001644] h-screen w-64 fixed left-0 top-0 overflow-y-auto z-50 flex-col py-8 px-4">
+      <aside className="hidden sm:flex bg-linear-to-br from-[#00296f] to-[#001644] h-screen w-64 fixed left-0 top-0 overflow-y-auto z-50 flex-col py-8 px-4">
         <div className="mb-10 px-2">
           <div className="flex items-center gap-3">
             <div>
-              <div className="text-2xl text-white font-bold text-blue-950 leading-tight">
+              <div className="text-2xl text-white font-bold leading-tight">
                 CPR
               </div>
               <div className="text-[10px] text-white uppercase tracking-widest font-bold">
@@ -94,7 +94,7 @@ const SideNav = ({ open, setOpen }: NavProps) => {
 
       {/**Mobile Nav */}
       <aside
-        className={`${open ? "translate-x-0" : "-translate-x-65"} sm:flex bg-gradient-to-br from-[#00296f] to-[#001644] h-screen w-64 fixed left-0 top-0 overflow-y-auto z-50 flex-col py-8 px-4 transition-all duration-700`}
+        className={`${open ? "translate-x-0" : "-translate-x-65"} sm:flex bg-linear-to-br from-[#00296f] to-[#001644] h-screen w-64 fixed left-0 top-0 overflow-y-auto z-50 flex-col py-8 px-4 transition-all duration-700`}
       >
         <div className="mb-10 px-2">
           <div className="">
@@ -107,7 +107,7 @@ const SideNav = ({ open, setOpen }: NavProps) => {
           </div>
           <div className="flex items-center gap-3">
             <div>
-              <div className="text-2xl text-white font-bold text-blue-950 leading-tight">
+              <div className="text-2xl text-white font-bold leading-tight">
                 CPR
               </div>
               <div className="text-[10px] text-white uppercase tracking-widest font-bold">

@@ -1,36 +1,29 @@
-import React, { useState, type FormEvent, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, type FormEvent, } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/signup.css";
 import Navbar from "../components/NavBar";
-import { Link } from "react-router-dom";
 import useAxios from "../api/apiAxios";
-import type { AxiosResponse } from "axios";
+import {Toaster, toast} from "sonner";
 
 const Signup: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [message, setMessage] = useState<string | null>("");
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setMessage("");
-    }, 3000);
-  }, [message]);
+   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (password.length < 6) {
-      setMessage("Password must be 6 digits");
+      toast.error("Password must be 6 digits");
       return;
     }
-    const body: Object = JSON.stringify({
-      username: username.toLowerCase(),
+    const body = {
+      username: username.trim().toLowerCase(),
       password,
-    });
+    }
+    
     try {
-      const response: AxiosResponse = await useAxios.post(
+      const response = await useAxios.post(
         "/auth/signup",
         body,
         {
@@ -39,15 +32,16 @@ const Signup: React.FC = () => {
           },
         },
       );
-      console.log(body);
       setUsername("");
       setPassword("");
       if (response.status === 201) {
-        setMessage("Signup successful");
-        navigate("/login");
+        toast.success("Signup successful");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       }
     } catch (error: any) {
-      setMessage(error.response.data?.error);
+      toast.error(error.response.data?.error);
     }
   };
 
@@ -55,6 +49,7 @@ const Signup: React.FC = () => {
     <div className="signup-container">
       <main className="signup-main">
         <Navbar />
+        <Toaster position="top-right" richColors/>
         {/* Left Section */}
         <section className="signup-left">
           <div className="left-content">
@@ -71,9 +66,6 @@ const Signup: React.FC = () => {
         <section className="signup-right">
           <div className="form-wrapper">
             <div className="form-header">
-              <div>
-                <p className="text-center text-red-500">{message}</p>
-              </div>
               <h2>Create Access</h2>
               <p>Initialize your institutional profile to begin.</p>
             </div>

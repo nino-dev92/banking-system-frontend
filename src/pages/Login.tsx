@@ -1,33 +1,26 @@
-import { useState, type FormEvent, useEffect } from "react";
+import { useState, type FormEvent } from "react";
 import useAxios from "../hooks/useAxios";
 import React from "react";
 import Navbar from "../components/NavBar";
 import "../styles/login.css";
 import { useAuth } from "../context/AuthProvider";
-import type { AxiosResponse } from "axios";
+import { toast, Toaster } from "sonner";
 import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [message, setMessage] = useState<string | null>(null);
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const apiAxios = useAxios();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setMessage("");
-    }, 3000);
-  }, [message]);
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const body: Object = { username: username.toLowerCase(), password };
+    const body = { username: username.trim().toLowerCase(), password };
     try {
-      const response: AxiosResponse = await apiAxios.post(
+      const response = await apiAxios.post(
         "/auth/login",
-        JSON.stringify(body),
+        body,
         { headers: { "Content-Type": "application/json" } },
       );
 
@@ -36,19 +29,32 @@ const Login: React.FC = () => {
         username: response?.data?.username,
         islogged: true,
       });
+
+      toast.success("Login successful");
+
+     setTimeout(() => {
       if (!response?.data?.accNumber) navigate("/create-account");
       if (response.status == 200) navigate("/dashboard");
+     }, 2000);
+
     } catch (error: any) {
-      setMessage(error.response.data?.error);
+      toast.error(error.response.data?.error);
     }
   };
 
   return (
     <div className="app-container">
+
+      {/*Toast notification*/}
+      <Toaster position="top-right" richColors/>
+
+      {/*Navbar */}
       <Navbar />
+
       {/* Main */}
       <main className="main">
         <div className="login-container">
+
           {/* Left Panel */}
           <div className="left-panel">
             <div>
@@ -62,9 +68,6 @@ const Login: React.FC = () => {
 
           {/* Right Panel */}
           <div className="right-panel">
-            <div>
-              <p className="text-center text-red-500">{message}</p>
-            </div>
             <div className="header">
               <h1>Log In</h1>
               <br />
