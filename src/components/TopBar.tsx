@@ -29,7 +29,7 @@ const TopBar = ({ name, setOpen, open }: BarProps) => {
 
       <div className="flex items-center gap-4">
         <div className="text-right hidden sm:block">
-          <p className="text-sm font-bold text-slate-900 leading-none">{name}</p>
+          <p className="text-sm font-bold text-slate-900 leading-none">{name.toUpperCase()}</p>
           <p className="text-xs text-slate-500 mt-1">Premium Client</p>
         </div>
         <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 font-bold shadow-sm">

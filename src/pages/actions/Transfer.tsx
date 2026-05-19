@@ -116,7 +116,7 @@ const Transfer = () => {
                     <div className="text-right">
                       <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Source Account</p>
                       <p className="font-mono text-lg text-slate-200">
-                        {String(accountNum).replace(/(.{4})/g, "$1 ").trim()}
+                        {String(accountNum).replace(/(.{5})/g, "$1 ").trim()}
                       </p>
                     </div>
                   </div>
