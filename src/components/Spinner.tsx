@@ -2,10 +2,10 @@ import "../styles/loading.css";
 
 const Spinner = () => {
   return (
-    <div className="flex justify-center">
-      <div className="flex-col justify-center align-center text-center m-50">
-        <h1 className="text-3xl">Loading...</h1>
-        <div className="round m-auto"></div>
+    <div className="fixed inset-0 flex items-center justify-center bg-slate-50 z-100">
+      <div className="flex flex-col items-center gap-4">
+        <div className="round"></div>
+        <h1 className="text-xl font-bold text-slate-800 tracking-tight">Accessing Vault...</h1>
       </div>
     </div>
   );

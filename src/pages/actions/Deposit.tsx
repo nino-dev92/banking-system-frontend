@@ -12,8 +12,6 @@ const Deposit = () => {
   const [amount, setAmount] = useState<number | string>("");
   const [balance, setBalance] = useState<number | null>(0);
   const [accountNum, setAccountNum] = useState<number | null>(null);
-   const [income, setIncome] = useState<number | null>(0);
-  const [spent, setSpent] = useState<number | null>(0);
   const [open, setOpen] = useState<boolean>(false);
   const { auth, hasAccount } = useAuth();
   const apiAxios = useAxios();
@@ -45,8 +43,6 @@ const Deposit = () => {
       setName(response?.data?.name);
       setAccountNum(response?.data?.accNumber);
       setBalance(response?.data?.balance);
-      setIncome(response?.data?.income);
-      setSpent(response?.data?.spent);
     } catch (error: any) {
       console.log(error);
     } finally {
@@ -98,80 +94,86 @@ const Deposit = () => {
       )}
 
       {hasAccount && !loading && (
-        <div className="bg-background text-on-background min-h-screen">
-
+        <div className="min-h-screen bg-[#f8fafc]">
           <Toaster position="top-right" richColors />
-
-          {/* Sidebar */}
           <SideNav open={open} setOpen={setOpen} />
-
-          {/* Topbar */}
           <TopBar name={name as string} setOpen={setOpen} open={open} />
 
-          {/* Main */}
-          <main className="pl-5 pr-5 pt-24 sm:pl-65 pb-12 min-h-screen">
-            <div className="max-w-7xl mx-auto space-y-8 flex-col justify-center">
-              {/* Balance Section */}
-              <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 bg-linear-to-br from-[#00296f] to-[#001644] rounded-xl p-8 text-white flex flex-col justify-between min-h-[240px]">
-                  <div>
-                    <p className="text-sm opacity-70 mb-1">
-                      Total Available Balance
-                    </p>
-                    <h1 className="text-5xl font-extrabold">
-                      N{balance?.toLocaleString()}.00
-                    </h1>
-                  </div>
+          <main className="pl-0 sm:pl-64 pt-20 transition-all duration-300">
+            <div className="max-w-4xl mx-auto p-6 lg:p-10 space-y-8">
+              <header>
+                <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Deposit Funds</h1>
+                <p className="text-slate-500 mt-1">Add capital to your institutional account securely.</p>
+              </header>
 
-                  <div className="flex justify-between items-end mt-6">
+              <section className="grid grid-cols-1 gap-8">
+                {/* Balance Card - Refined for actions page */}
+                <div className="bg-slate-900 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                  
+                  <div className="relative z-10 flex justify-between items-center">
                     <div>
-                      <p className="text-xs uppercase opacity-70">
-                        Account Number
+                      <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Current Balance</p>
+                      <h2 className="text-4xl font-bold">₦{balance?.toLocaleString()}.00</h2>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Account</p>
+                      <p className="font-mono text-lg text-slate-200">
+                        {String(accountNum).replace(/(.{4})/g, "$1 ").trim()}
                       </p>
-                      <p className="font-mono text-lg">{accountNum}</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Side Card */}
-                <div className="bg-gray-100 rounded-xl p-6 space-y-6">
-                  <h3 className="font-bold">Monthly Overview</h3>
-
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span>Income</span>
-                      <span className="text-green-600 font-bold">
-                        +N{income}
-                      </span>
+                {/* Deposit Form */}
+                <div className="premium-card p-8 sm:p-12">
+                  <div className="max-w-md mx-auto space-y-8">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-900">Enter Deposit Amount</h3>
+                      <p className="text-slate-500 text-sm mt-1">Funds will be credited immediately.</p>
                     </div>
 
-                    <div className="flex justify-between">
-                      <span>Spent</span>
-                      <span className="text-red-500 font-bold">-N{spent}</span>
-                    </div>
-                  </div>
-                </div>
-              </section>
+                    <div className="space-y-6">
+                      <div className="relative group">
+                        <span className="absolute left-5 top-1/2 -translate-y-1/2 text-2xl font-bold text-slate-400">₦</span>
+                        <input
+                          className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-6 py-5 text-2xl font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
+                          placeholder="0.00"
+                          type="number"
+                          value={amount}
+                          onChange={(e) => setAmount(Number(e.target.value))}
+                        />
+                      </div>
 
-              {/* Deposit*/}
-             
-              <section className="space-y-6 flex-col items-center justify-center border border-color-blue-400 p-5 rounded-xl">
-                <h2 className="text-2xl font-bold text-center">Deposit</h2>
-                <div className="bg-white p-4 max-w-100 flex-col m-auto">
-                  <input
-                    className="border p-2 rounded w-full mb-3"
-                    placeholder="Amount"
-                    type="number"
-                    value={amount}
-                    onChange={(e) => setAmount(Number(e.target.value))}
-                  />
-                  <div className="flex gap-4 justify-center">
-                    <button
-                      className="border p-2 rounded bg-green-500 text-white cursor-pointer hover:bg-green-400"
-                      onClick={() => handleAction(deposit)}
-                    >
-                      DEPOSIT
-                    </button>
+                      <div className="grid grid-cols-3 gap-3">
+                        {[1000, 5000, 10000].map((val) => (
+                          <button
+                            key={val}
+                            onClick={() => setAmount(val)}
+                            className="py-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all"
+                          >
+                            +₦{val.toLocaleString()}
+                          </button>
+                        ))}
+                      </div>
+
+                      <button
+                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-5 rounded-2xl shadow-lg shadow-emerald-600/20 transition-all active:scale-[0.98] flex items-center justify-center gap-3 uppercase text-xs tracking-widest"
+                        onClick={() => handleAction(deposit)}
+                      >
+                        Confirm Deposit
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"/></svg>
+                      </button>
+                    </div>
+
+                    <p className="text-center text-[10px] text-slate-400 uppercase tracking-widest leading-relaxed">
+                      Secure transaction authorized by CPR Institutional Protocols.
+                    </p>
                   </div>
                 </div>
               </section>

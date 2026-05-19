@@ -18,162 +18,127 @@ const SideNav = ({ open, setOpen }: NavProps) => {
   const navigate = useNavigate();
   const { setAuth } = useAuth();
 
+  const navItems = [
+    { to: "/dashboard", label: "Dashboard", icon: <MdOutlineDashboard size={22} /> },
+    { to: "/deposit", label: "Deposit", icon: <FcMoneyTransfer size={22} /> },
+    { to: "/withdraw", label: "Withdraw", icon: <PiHandWithdraw size={22} /> },
+    { to: "/transfer", label: "Transfer", icon: <FaMoneyBillTransfer size={22} /> },
+  ];
+
   return (
-    <div>
-      {/**Desktop nav */}
-      <aside className="hidden sm:flex bg-linear-to-br from-[#00296f] to-[#001644] h-screen w-64 fixed left-0 top-0 overflow-y-auto z-50 flex-col py-8 px-4">
-        <div className="mb-10 px-2">
+    <>
+      {/* Desktop Sidebar */}
+      <aside className="hidden sm:flex flex-col w-64 bg-slate-900 h-screen fixed left-0 top-0 z-50 border-r border-slate-800 shadow-xl overflow-hidden">
+        <div className="p-8">
           <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-600/20">
+              C
+            </div>
             <div>
-              <div className="text-2xl text-white font-bold leading-tight">
-                CPR
-              </div>
-              <div className="text-[10px] text-white uppercase tracking-widest font-bold">
-                Institutional Vault
-              </div>
+              <h1 className="text-white font-bold text-lg leading-none tracking-tight">CPRBANK</h1>
+              <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Premium Vault</span>
             </div>
           </div>
         </div>
 
-        <nav className="flex-1 space-y-1 navlinks">
-          <NavLink
-            to="/dashboard"
-            className={`flex items-center gap-3 rounded-xl px-4 py-3 cursor-pointer text-slate-500 hover:text-blue-900 hover:bg-blue-500`}
-          >
-            <span>
-              <MdOutlineDashboard />
-            </span>
-            <span>Dashboard</span>
-          </NavLink>
-
-          <NavLink
-            to="/deposit"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-900 hover:bg-blue-500 transition cursor-pointer"
-          >
-            <span>
-              <FcMoneyTransfer />
-            </span>
-            <span>Deposit</span>
-          </NavLink>
-          <NavLink
-            to="/withdraw"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-900 hover:bg-blue-500 transition cursor-pointer"
-          >
-            <span>
-              <PiHandWithdraw />
-            </span>
-            <span>Withdraw</span>
-          </NavLink>
-          <NavLink
-            to="/transfer"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-900 hover:bg-blue-500 transition cursor-pointer"
-          >
-            <span>
-              <FaMoneyBillTransfer />
-            </span>
-            <span>Transfer</span>
-          </NavLink>
+        <nav className="flex-1 px-4 mt-4 space-y-2">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-200 group ${
+                  isActive
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
+                    : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                }`
+              }
+            >
+              <span className="group-hover:scale-110 transition-transform">{item.icon}</span>
+              <span className="font-semibold">{item.label}</span>
+            </NavLink>
+          ))}
         </nav>
 
-        <div className="mt-auto">
+        <div className="p-4 mt-auto">
           <button
-            className="w-full border-white text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 cursor-pointer hover:bg-blue-500 transition"
             onClick={() => {
               localStorage.removeItem("auth");
               setAuth({});
               navigate("/login");
             }}
+            className="w-full flex items-center justify-center gap-3 px-4 py-4 rounded-2xl text-rose-400 font-bold hover:bg-rose-500/10 transition-colors uppercase text-xs tracking-widest border border-slate-800"
           >
-            <span>
-              <FaPowerOff />
-            </span>
-            <span>Log Out</span>
+            <FaPowerOff />
+            <span>Sign Out</span>
           </button>
         </div>
       </aside>
 
-      {/**Mobile Nav */}
+      {/* Mobile Sidebar Overlay */}
+      {open && (
+        <div 
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-60 sm:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      {/* Mobile Sidebar */}
       <aside
-        className={`${open ? "translate-x-0" : "-translate-x-65"} sm:flex bg-linear-to-br from-[#00296f] to-[#001644] h-screen w-64 fixed left-0 top-0 overflow-y-auto z-50 flex-col py-8 px-4 transition-all duration-700`}
+        className={`fixed left-0 top-0 h-screen w-72 bg-slate-900 z-70 transition-transform duration-500 ease-in-out sm:hidden flex flex-col ${
+          open ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
-        <div className="mb-10 px-2">
-          <div className="">
-            <IoArrowBackCircleOutline
-              size={60}
-              style={{ color: "white", marginBottom: "20px" }}
-              className="cursor-pointer hover:text-red-500"
-              onClick={() => setOpen(!open)}
-            />
-          </div>
+        <div className="p-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+              C
+            </div>
             <div>
-              <div className="text-2xl text-white font-bold leading-tight">
-                CPR
-              </div>
-              <div className="text-[10px] text-white uppercase tracking-widest font-bold">
-                Institutional Vault
-              </div>
+              <h1 className="text-white font-bold text-lg leading-none tracking-tight">CPRBANK</h1>
+              <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Premium Vault</span>
             </div>
           </div>
+          <button onClick={() => setOpen(false)} className="text-slate-400">
+            <IoArrowBackCircleOutline size={32} />
+          </button>
         </div>
 
-        <nav className="flex-1 space-y-1 navlinks">
-          <NavLink
-            to="/dashboard"
-            className={`flex items-center gap-3 rounded-xl px-4 py-3 cursor-pointer text-slate-500 hover:text-blue-900 hover:bg-blue-500`}
-          >
-            <span>
-              <MdOutlineDashboard />
-            </span>
-            <span>Dashboard</span>
-          </NavLink>
-
-          <NavLink
-            to="/deposit"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-900 hover:bg-blue-500 transition cursor-pointer"
-          >
-            <span>
-              <FcMoneyTransfer />
-            </span>
-            <span>Deposit</span>
-          </NavLink>
-          <NavLink
-            to="/withdraw"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-900 hover:bg-blue-500 transition cursor-pointer"
-          >
-            <span>
-              <PiHandWithdraw />
-            </span>
-            <span>Withdraw</span>
-          </NavLink>
-          <NavLink
-            to="/transfer"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-blue-900 hover:bg-blue-500 transition cursor-pointer"
-          >
-            <span>
-              <FaMoneyBillTransfer />
-            </span>
-            <span>Transfer</span>
-          </NavLink>
+        <nav className="flex-1 px-4 mt-4 space-y-2">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-4 py-4 rounded-2xl transition-all duration-200 ${
+                  isActive
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "text-slate-400 hover:bg-slate-800"
+                }`
+              }
+            >
+              <span>{item.icon}</span>
+              <span className="font-semibold text-lg">{item.label}</span>
+            </NavLink>
+          ))}
         </nav>
 
-        <div className="mt-auto">
+        <div className="p-4 mt-auto">
           <button
-            className="w-full border-white text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 cursor-pointer hover:bg-blue-500 transition"
             onClick={() => {
               localStorage.removeItem("auth");
               setAuth({});
               navigate("/login");
             }}
+            className="w-full h-14 bg-rose-500/10 text-rose-400 rounded-2xl text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3"
           >
-            <span>
-              <FaPowerOff />
-            </span>
-            <span>Log Out</span>
+            <FaPowerOff />
+            <span>Sign Out</span>
           </button>
         </div>
       </aside>
-    </div>
+    </>
   );
 };
 
